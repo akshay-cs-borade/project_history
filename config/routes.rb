@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :histories
+  resources :comments
+  resources :projects
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,5 +10,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root to: "home#index"
+  root to: "projects#index"
+
+  resources :projects do
+    resources :comments, only: [:create, :destroy,]
+  end
 end

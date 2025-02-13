@@ -1,0 +1,24 @@
+<h1><%= @project.name %></h1>
+<p>Status: <%= @project.status %></p>
+
+<% if current_user.can_change_status? %>
+  <h2>Change Status</h2>
+  <%= form_with url: project_path(@project), method: :patch do %>
+    <%= select_tag :status, options_for_select(Project::STATUSES, @project.status), class: "form-control mb-2" %>
+    <%= submit_tag "Update Status", class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+<h2>Comments</h2>
+<%= form_with model: [@project, Comment.new], local: true do |f| %>
+  <%= f.text_area :content, class: "form-control mb-2" %>
+  <%= f.submit "Add Comment", class: "btn btn-primary" %>
+<% end %>
+
+<ul class="list-group mt-3">
+  <% @comments.each do |comment| %>
+    <li class="list-group-item">
+      <strong><%= "#{comment.user.name} (#{comment.user.email})" %>:</strong> <%= comment.content %>
+    </li>
+  <% end %>
+</ul>
