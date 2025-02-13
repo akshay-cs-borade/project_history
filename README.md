@@ -1,24 +1,71 @@
-# README
+## **Project Conversation History**  
+A **Ruby on Rails** application that allows teams to track **project progress, comments, and status changes**. Managers and developers can collaborate, while admins oversee everything.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
 
-Things you may want to cover:
+## **🚀 Features**
+- ✅ **Role-Based Access Control**  
+  - Admin can manage all projects.  
+  - Managers can create projects and assign them to developers.  
+  - Developers can only view and comment on assigned projects.  
+- ✅ **Project Status Management**  
+  - Statuses: `Pending`, `In Progress`, `Completed`  
+  - Only **Managers** and **Admins** can change project status.  
+- ✅ **Commenting System**  
+  - Users can leave comments but **cannot edit or delete them**.  
+  - Only **Admins** can delete inappropriate comments.  
+- ✅ **Email Notifications**  
+  - Users receive **notifications** when a new comment or status change is made.  
 
-* Ruby version
+---
 
-* System dependencies
+## **🛠️ Technologies Used**
+- **Backend**: Ruby on Rails  
+- **Database**: PostgreSQL  
+- **Frontend**: Bootstrap  
+- **WebSockets**: ActionCable  
+- **Authentication & Authorization**: Devise  
+- **Notifications**: ActionMailer  
 
-* Configuration
+---
 
-* Database creation
+## **📜 Installation & Setup**
+### **1. Clone the Repository**
+```sh
+git clone https://github.com/YOUR_USERNAME/project-conversation-history.git
+cd project-conversation-history
+```
 
-* Database initialization
+### **2. Install Dependencies**
+```sh
+bundle install
+```
 
-* How to run the test suite
+### **3. Set Up Database**
+```sh
+rails db:create db:migrate db:seed
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### **4. Start the Server**
+```sh
+rails s
+```
+Visit **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-* Deployment instructions
+---
 
-* ...
+## **🔑 User Roles & Permissions**
+| Role     | Can Create Project | Can Assign Projects | Can Comment | Can Change Status | Can Delete Comments |
+|----------|-------------------|---------------------|-------------|------------------|-------------------|
+| **Admin**  | ✅ | ✅ (Assign to Anyone) | ✅ | ✅ | ✅ |
+| **Manager** | ✅ | ✅ (Assign to Developers) | ✅ | ✅ | ❌ |
+| **Developer** | ❌ | ❌ | ✅ | ❌ | ❌ |
+
+
+---
+
+## **📧 Email Notifications**
+The app uses **ActionMailer** for notifications:
+- Setup `config/environments/development.rb` with SMTP settings.
+- Configure `config/environments/production.rb` for live emails.
+
